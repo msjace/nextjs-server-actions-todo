@@ -35,7 +35,7 @@ export async function login(
     }
 
     const { error } = await supabase.auth.signInWithPassword(credentials)
-    if (error) throw new Error()
+    if (error) throw new Error(error.message)
   } catch (error: any) {
     console.log(error)
     const message = StringUtil.parseSupabaseError(error)

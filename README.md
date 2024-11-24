@@ -2,6 +2,15 @@
 
 Based on Server Actions, I implemented optimistic updates using useOptimistic for adding, deleting, and editing todos via drag-and-drop. This ensures that the UI reflects the result immediately without waiting for the database update. If the data change is not applied due to validation or other reasons, the UI reverts to its original state.
 
+As you can see in the video below, when a validation error occurs, the UI is immediately updated before the database is updated, and if something goes wrong, it reverts to the previous state. When you want to update the UI instantly during actions like drag-and-drop, useOptimistic is extremely useful.
+
+
+
+https://github.com/user-attachments/assets/415a397b-ac61-45b2-906c-e1f250bd23ae
+
+
+
+
 ## Getting Started
 
 ## setting .env.development.local

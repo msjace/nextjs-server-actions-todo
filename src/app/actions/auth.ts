@@ -35,7 +35,7 @@ export async function login(
     }
 
     const { error } = await supabase.auth.signInWithPassword(credentials)
-    if (error) throw new Error(error.message)
+    if (error) throw error
   } catch (error: any) {
     console.log(error)
     const message = StringUtil.parseSupabaseError(error)
@@ -57,7 +57,7 @@ export async function signup(
     }
 
     const { error } = await supabase.auth.signUp(data)
-    if (error) throw new Error()
+    if (error) throw error
   } catch (error: any) {
     console.log(error)
     const message = StringUtil.parseSupabaseError(error)
@@ -86,15 +86,17 @@ export async function getSession(): Promise<Session | null> {
 export async function verifyEmail(token: string): Promise<string | null> {
   const supabase = createClient()
 
-  const { error } = await supabase.auth.verifyOtp({
-    type: 'signup',
-    token_hash: token,
-  })
-  if (error) {
-    const message = StringUtil.parseSupabaseError(error)
-    return message
-  }
+  try {
+    const { error } = await supabase.auth.verifyOtp({
+      type: 'signup',
+      token_hash: token,
+    })
+    if (error) throw error
 
-  await supabase.auth.signOut()
-  return null
+    await supabase.auth.signOut()
+    return null
+  } catch (error: any) {
+    console.log(error)
+    return StringUtil.parseSupabaseError(error)
+  }
 }

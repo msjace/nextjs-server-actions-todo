@@ -1,17 +1,17 @@
-## NextJS 14 Server Actions and Supabase
+# NextJS 14 Server Actions and Supabase
 
 Based on Server Actions, I implemented optimistic updates using useOptimistic for adding, deleting, and editing todos via drag-and-drop. This ensures that the UI reflects the result immediately without waiting for the database update. If the data change is not applied due to validation or other reasons, the UI reverts to its original state.
 
-### Getting Started
+## Getting Started
 
-### setting .env.development.local
+## setting .env.development.local
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-#### Supabase Table
+### Supabase Table
 
 Since the data is simple this time, I applied basic SQL without using Prisma or similar tools.
 
@@ -39,7 +39,7 @@ CREATE POLICY "Users can delete their own todos" ON todos FOR
 
 ```
 
-#### Supabase Database Functions
+### Supabase Database Functions
 
 I created Functions this time to support transaction processing.
 
@@ -60,11 +60,11 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-#### Supabase SMTP Settings
+### Supabase SMTP Settings
 
 https://supabase.com/docs/guides/auth/auth-smtp
 
-#### Authentication Email Templates Confirm Signup
+### Authentication Email Templates Confirm Signup
 
 ```html
 <h2>Confirm your signup</h2>
